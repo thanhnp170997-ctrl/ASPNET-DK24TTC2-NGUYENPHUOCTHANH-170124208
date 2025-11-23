@@ -1,0 +1,183 @@
+﻿@model WebsiteNhacOnl.Models.PhanHoiND
+
+@{
+    ViewBag.Title = "Liên hệ & Phản hồi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="~/Content/CSS/nct-style.css" />
+
+@*<style>
+    /* --- Nền giống index (NCT) --- */
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(180deg, #1e2a2f 0%, #0b0d0f 100%);
+        color: #fff;
+        min-height: 100vh;
+    }
+
+    h2, h4 {
+        color: #fff;
+        font-weight: 600;
+    }
+
+    .contact-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        margin-top: 40px;
+    }
+
+    .contact-info, .contact-form {
+        flex: 1;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+        .contact-info p {
+            color: #ccc;
+            margin-bottom: 8px;
+        }
+
+    iframe {
+        border-radius: 12px;
+        border: none;
+        width: 100%;
+        height: 300px;
+    }
+
+    label {
+        font-weight: 500;
+        color: #ddd;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        color: #fff;
+        border-radius: 10px;
+        padding: 10px;
+        transition: background 0.3s, border 0.3s;
+    }
+
+        .form-control:focus {
+            background: rgba(255,255,255,0.15);
+            border-color: #1ed760;
+            outline: none;
+            box-shadow: 0 0 8px rgba(30, 215, 96, 0.4);
+        }
+
+    input[type="submit"] {
+        background: #1ed760;
+        color: #000;
+        border: none;
+        border-radius: 25px;
+        padding: 12px 35px;
+        font-weight: 600;
+        transition: background 0.3s, transform 0.3s;
+    }
+
+        input[type="submit"]:hover {
+            background: #1db954;
+            transform: scale(1.05);
+        }
+
+    .return-home a {
+        color: #1ed760;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s;
+    }
+
+        .return-home a:hover {
+            color: #1db954;
+        }
+</style>*@
+
+<div class="container py-5">
+    <h2 class="text-center mb-4">
+        Liên hệ với <span style="color:#1ed760;">MUSIC ONLINE</span>
+    </h2>
+
+    <div class="contact-wrapper">
+
+        <!-- Thông tin liên hệ -->
+        <div class="contact-info">
+            <h4>Thông tin liên hệ</h4>
+            <p><b>🎓 Đại học Trà Vinh</b></p>
+            <p>📞 Phone: +84 92.701.809</p>
+            <p>✉ Email: admin@gmail.com</p>
+
+            <h4 class="mt-4">Vị trí</h4>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d16456.84907045425!2d106.33067480155081!3d9.934472542680249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a0175ea296facb%3A0x55ded92e29068221!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBUcsOgIFZpbmg!5e1!3m2!1svi!2sus!4v1742301052169!5m2!1svi!2sus"
+                    loading="lazy" allowfullscreen=""></iframe>
+        </div>
+
+        <!-- Form phản hồi -->
+        <div class="contact-form">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <h4 class="text-center mb-4">Gửi phản hồi của bạn</h4>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.HoTen)
+                    @Html.TextBoxFor(model => model.HoTen, new { @class = "form-control", placeholder = "Họ và tên" })
+                    @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.NamSinh)
+                    @Html.TextBoxFor(model => model.NamSinh, new { @class = "form-control", placeholder = "Năm sinh" })
+                    @Html.ValidationMessageFor(model => model.NamSinh, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Sdt)
+                    @Html.TextBoxFor(model => model.Sdt, new { @class = "form-control", placeholder = "Số điện thoại" })
+                    @Html.ValidationMessageFor(model => model.Sdt, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Mail)
+                    @Html.TextBoxFor(model => model.Mail, new { @class = "form-control", placeholder = "Email" })
+                    @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.DiaChi)
+                    @Html.TextBoxFor(model => model.DiaChi, new { @class = "form-control", placeholder = "Địa chỉ" })
+                    @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.NdPhanHoi)
+                    @Html.TextAreaFor(model => model.NdPhanHoi, new { @class = "form-control", rows = 5, placeholder = "Nội dung phản hồi" })
+                    @Html.ValidationMessageFor(model => model.NdPhanHoi, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="text-center mt-3">
+                    <input type="submit" value="Gửi phản hồi" />
+                </div>
+            }
+
+            <div class="text-center mt-4 return-home">
+                @Html.ActionLink("← Trở lại trang chủ", "Index", "Home")
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

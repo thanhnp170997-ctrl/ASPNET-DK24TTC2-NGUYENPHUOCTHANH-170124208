@@ -1,0 +1,213 @@
+﻿@model WebsiteNhacOnl.Models.BaiHat
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Link font đẹp -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+@*<link href="~/Areas/Admin/ContentAd/css/adbaihatstyle.css" rel="stylesheet" />*@
+
+<br />
+<h2 class="page-title">SỬA BÀI HÁT</h2>
+<hr class="divider" />
+
+@using (Html.BeginForm("Edit", "adBaiHats", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+<div class="form-container">
+
+    <div class="form-group">
+        <label class="form-label">Tên bài hát</label>
+        @Html.EditorFor(model => model.TenBH, new { htmlAttributes = new { @class = "form-control custom-input" } })
+        @Html.ValidationMessageFor(model => model.TenBH, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Ca sĩ</label>
+        @Html.EditorFor(model => model.CaSi, new { htmlAttributes = new { @class = "form-control custom-input" } })
+        @Html.ValidationMessageFor(model => model.CaSi, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Tác giả</label>
+        @Html.EditorFor(model => model.TacGia, new { htmlAttributes = new { @class = "form-control custom-input" } })
+        @Html.ValidationMessageFor(model => model.TacGia, "", new { @class = "text-danger" })
+    </div>
+
+    @*<div class="form-group">
+            <label class="form-label">Ngày cập nhật</label>
+            @Html.TextBoxFor(model => model.NgayCapNhat, new { @type = "date", @class = "form-control custom-input", value = Model.NgayCapNhat.ToString("yyyy-MM-dd") })
+            @Html.ValidationMessageFor(model => model.NgayCapNhat, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Hình ảnh bài hát</label>
+            <input type="file" name="img" id="img" accept=".jpg,.png,.gif,.jpeg,.bmp" class="form-control custom-input" />
+            @Html.ValidationMessageFor(model => model.HinhAnhBH, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Lời bài hát</label>
+            @Html.TextAreaFor(model => model.LoiBH, new { @class = "form-control custom-input", cols = "60", rows = "8" })
+            @Html.ValidationMessageFor(model => model.LoiBH, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Link bài hát (.mp3)</label>
+            <input type="file" name="url" id="url" accept=".mp3" class="form-control custom-input" />
+            @Html.ValidationMessageFor(model => model.UrlBH, "", new { @class = "text-danger" })
+        </div>*@
+    <div class="form-group">
+        <label class="form-label">Ngày cập nhật</label>
+        @Html.TextBoxFor(model => model.NgayCapNhat, new { @type = "date", @class = "form-control custom-input", value = Model.NgayCapNhat.ToString("yyyy-MM-dd") })
+        @Html.ValidationMessageFor(model => model.NgayCapNhat, "", new { @class = "text-danger" })
+    </div>
+
+
+    <dt>
+        Hình ảnh bài hát
+    </dt>
+    <dd>
+        @Html.EditorFor(model => model.HinhAnhBH, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.HinhAnhBH, "", new { @class = "text-danger" })
+    </dd>
+    <div class="form-group">
+        <label class="form-label">Lời bài hát</label>
+        @Html.TextAreaFor(model => model.LoiBH, new { @class = "form-control custom-input", cols = "60", rows = "8" })
+        @Html.ValidationMessageFor(model => model.LoiBH, "", new { @class = "text-danger" })
+    </div>
+    <dt>
+        Link bài hát
+    </dt>
+
+    <dd>
+        @Html.EditorFor(model => model.UrlBH, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.UrlBH, "", new { @class = "text-danger" })
+
+    </dd>
+
+
+    <div class="form-group">
+        <label class="form-label">Mã thể loại</label>
+        @Html.DropDownList("MaTL", null, htmlAttributes: new { @class = "form-control custom-input" })
+        @Html.ValidationMessageFor(model => model.MaTL, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn-save">💾 Lưu thay đổi</button>
+        <a href="@Url.Action("Index")" class="btn-back">← Trở Lại</a>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f8f9fb;
+        color: #000;
+    }
+
+    .page-title {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 600;
+        color: #FF5722;
+        letter-spacing: 1px;
+    }
+
+    .divider {
+        width: 60px;
+        height: 1px;
+        background-color: #ff5722;
+        margin: 8px auto 25px auto;
+    }
+
+    .form-container {
+        max-width: 700px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 30px 40px;
+        border-radius: 16px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .form-label {
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #000;
+        display: block;
+    }
+
+    .custom-input {
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 100%;
+        color: #000;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .custom-input:focus {
+            border-color: #FF5722;
+            box-shadow: 0 0 4px rgba(255, 87, 34, 0.4);
+            outline: none;
+        }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .btn-save {
+        background-color: #FF5722;
+        color: white;
+        border: none;
+        padding: 12px 26px;
+        font-size: 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+        .btn-save:hover {
+            background-color: #e64a19;
+            transform: translateY(-2px);
+        }
+
+    .btn-back {
+        text-decoration: none;
+        background-color: #607D8B;
+        color: white;
+        padding: 12px 26px;
+        font-size: 16px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+        .btn-back:hover {
+            background-color: #455A64;
+            transform: translateY(-2px);
+        }
+
+    .text-danger {
+        color: #d32f2f;
+        font-size: 14px;
+    }
+</style>

@@ -1,0 +1,148 @@
+﻿@model WebsiteNhacOnl.Models.BaiHat
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Link font chữ Poppins -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+@*<link href="~/Areas/Admin/ContentAd/css/adbaihatstyle.css" rel="stylesheet" />*@
+
+<br />
+<h2 class="page-title">XÓA BÀI HÁT</h2>
+<hr class="divider" />
+
+<div class="delete-container">
+    <dl class="info-list">
+        <dt>Tên bài hát</dt>
+        <dd>@Html.DisplayFor(model => model.TenBH)</dd>
+
+        <dt>Ca sĩ</dt>
+        <dd>@Html.DisplayFor(model => model.CaSi)</dd>
+
+        <dt>Tác giả</dt>
+        <dd>@Html.DisplayFor(model => model.TacGia)</dd>
+
+        <dt>
+            Ngày cập nhật
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayCapNhat)
+        </dd>
+
+        <dt>
+            Hình ảnh bài hát
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HinhAnhBH)
+        </dd>
+
+        <dt>
+            Link bài hát
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UrlBH)
+        </dd>
+
+
+    </dl>
+
+    @using (Html.BeginForm("Delete", "adBaiHats", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-actions">
+            <input type="submit" value="🗑️ Xóa bài hát" class="btn-delete" />
+            <a href="@Url.Action("Index")" class="btn-back">← Trở Lại</a>
+        </div>
+    }
+</div>
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f8f9fb;
+        color: #333;
+    }
+
+    .page-title {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 600;
+        color: #FF5722;
+        letter-spacing: 1px;
+    }
+
+    .divider {
+        width: 60px;
+        height: 1px;
+        background-color: #FF5722;
+        margin: 8px auto 25px auto;
+    }
+
+    .delete-container {
+        max-width: 700px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 30px 40px;
+        border-radius: 16px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .info-list dt {
+        font-weight: 600;
+        color: #000;
+        margin-top: 15px;
+    }
+
+    .info-list dd {
+        margin-left: 10px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .form-actions {
+        text-align: center;
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .btn-delete {
+        background-color: #FF5722;
+        border: none;
+        color: white;
+        padding: 12px 28px;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+        .btn-delete:hover {
+            background-color: #E64A19;
+            transform: scale(1.05);
+        }
+
+    .btn-back {
+        text-decoration: none;
+        background-color: #607D8B;
+        color: white;
+        padding: 12px 28px;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 16px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+        .btn-back:hover {
+            background-color: #455A64;
+            transform: translateY(-2px);
+        }
+</style>

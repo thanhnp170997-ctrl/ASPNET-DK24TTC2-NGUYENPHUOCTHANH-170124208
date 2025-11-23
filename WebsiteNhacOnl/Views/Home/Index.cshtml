@@ -1,0 +1,279 @@
+﻿@model IEnumerable<WebsiteNhacOnl.Models.BaiHat>
+
+@{
+    ViewBag.Title = "Trang Chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="~/Content/CSS/nct-style.css" />
+
+@*<style>
+        /* Toàn bộ giao diện nền kiểu NCT */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #1e2a2f 0%, #0b0d0f 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        h2 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Card bài hát mới */
+        .music-card {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 12px;
+            padding: 10px;
+            transition: transform 0.3s, background 0.3s;
+            cursor: pointer;
+        }
+
+            .music-card:hover {
+                transform: translateY(-3px);
+                background: rgba(255,255,255,0.08);
+            }
+
+            .music-card img {
+                width: 60px;
+                height: 60px;
+                border-radius: 10px;
+                margin-right: 15px;
+            }
+
+        .music-info h5 {
+            margin: 0;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .music-info i {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .music-actions a {
+            margin-right: 10px;
+            font-size: 14px;
+            color: #1ed760;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+            .music-actions a:hover {
+                color: #1db954;
+            }
+
+        /* Player */
+        #playMusic {
+            background: rgba(0,0,0,0.5);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+
+            #playMusic img {
+                border-radius: 12px;
+                width: 100%;
+                max-width: 240px;
+                height: auto;
+                margin-bottom: 10px;
+            }
+
+        #musicInfo b {
+            display: block;
+            font-size: 18px;
+            color: #fff;
+            margin-top: 5px;
+        }
+
+        #musicInfo i {
+            display: block;
+            font-size: 14px;
+            color: #bbb;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 15px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* Nhạc Hot */
+        .hot-card {
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s, background 0.3s;
+            cursor: pointer;
+        }
+
+            .hot-card:hover {
+                transform: translateY(-5px) scale(1.03);
+                background: rgba(255,255,255,0.1);
+            }
+
+        .hot-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+            .hot-img:hover {
+                transform: scale(1.05);
+            }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 5px;
+            color: #fff;
+        }
+
+        .badge.bg-secondary {
+            background: linear-gradient(90deg, #ff9800, #ff5722);
+            color: #fff;
+        }
+    </style>*@
+
+<div class="home-page container py-4">
+
+
+    <h2 class="text-center" style="margin-top: 10px;">
+        Top 5 Bài Hát Mới
+        <img src="~/Content/images/imgweb/icon-moi.gif" style="width:28px; vertical-align: middle;" />
+    </h2>
+    <br />
+
+    <div class="home-container mt-3">
+        <div class="left-column">
+            @foreach (var item in Model.Take(5))
+            {
+                <div class="music-card" onclick="setMusicPlay('/Content/music/@item.UrlBH', '@item.HinhAnhBH', '@item.TenBH', '@item.CaSi')">
+                    <img src="@item.HinhAnhBH" alt="@item.TenBH" />
+                    <div class="music-info">
+                        <h5>@item.TenBH</h5>
+                        <i>@item.CaSi</i>
+                        <div class="music-actions">
+                            @Html.ActionLink("Chi tiết", "Details", new { id = item.Id })
+                            @Html.ActionLink("Tải về", "Download", new { fileName = item.UrlBH })
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Audio Player -->
+        <div class="right-column">
+            <div class="home-audio-player">
+                <img id="showI" src="~/Content/images/imgweb/icon_nhac_audio.jpg" alt="Nhạc đang phát" />
+                <div id="musicInfo">
+                    <b id="showN">Tên bài hát</b>
+                    <i id="showS">Ca sĩ</i>
+                </div>
+                <audio id="audio" controls>
+                    <source src="~/Content/music/a.mp3" type="audio/mpeg">
+                    Trình duyệt của bạn không hỗ trợ audio.
+                </audio>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Nhạc Hot -->
+<div class="hot-section mt-5">
+    <h2 class="text-center fw-bold">
+        Nhạc <span class="badge bg-secondary">Hot</span>
+    </h2>
+
+    <br />
+    <div class="row g-3">
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card hot-card shadow-sm h-100">
+                <a href="~/Content/music/Không Buông.mp3">
+                    <img src="~/Content/images/a1.jpg" class="card-img-top hot-img" alt="Không Buông">
+                </a>
+                <div class="card-body text-center">
+                    <h6 class="card-title text-truncate">
+                        Không Buông
+                        <img src="~/Content/images/imgweb/hot-1.gif" style="width:30px;" />
+                    </h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card hot-card shadow-sm h-100">
+                <a href="~/Content/music/Cô Đơn.mp3">
+                    <img src="~/Content/images/a2.jpg" class="card-img-top hot-img" alt="Cô Đơn">
+                </a>
+                <div class="card-body text-center">
+                    <h6 class="card-title text-truncate">
+                        Cô Đơn
+                        <img src="~/Content/images/imgweb/hot-1.gif" style="width:30px;" />
+                    </h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card hot-card shadow-sm h-100">
+                <a href="~/Content/music/Phong Sương (feat. Hngle, Lil Roff).mp3">
+                    <img src="~/Content/images/a4.jpg" class="card-img-top hot-img" alt="Phong Sương">
+                </a>
+                <div class="card-body text-center">
+                    <h6 class="card-title text-truncate">
+                       Phong Sương
+                        <img src="~/Content/images/imgweb/hot-1.gif" style="width:30px;" />
+                    </h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card hot-card shadow-sm h-100">
+                <a href="~/Content/music/One More Time.mp3">
+                    <img src="~/Content/images/a3.jpg" class="card-img-top hot-img" alt="One More one">
+                </a>
+                <div class="card-body text-center">
+                    <h6 class="card-title text-truncate">
+                       One More One
+                        <img src="~/Content/images/imgweb/hot-1.gif" style="width:30px;" />
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br />
+<script>
+    function setMusicPlay(musicUrl, imgURL, nameSong, singerSong) {
+        var audio = document.getElementById("audio");
+        var image = document.getElementById("showI");
+        var name = document.getElementById("showN");
+        var singer = document.getElementById("showS");
+
+        audio.src = musicUrl;
+        image.src = imgURL;
+        name.innerText = nameSong;
+        singer.innerText = singerSong;
+        audio.play();
+    }
+</script>
+

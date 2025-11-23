@@ -1,0 +1,206 @@
+﻿@model WebsiteNhacOnl.Models.BaiHat
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Font chữ sang trọng -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+@*<link href="~/Areas/Admin/ContentAd/css/adbaihatstyle.css" rel="stylesheet" />*@
+
+<br />
+<h2 class="page-title">CHI TIẾT BÀI HÁT</h2>
+<hr class="divider" />
+
+<div class="details-container">
+    <dl class="detail-list">
+
+        <dt>Tên bài hát</dt>
+        <dd>@Html.DisplayFor(model => model.TenBH)</dd>
+
+        <dt>Ca sĩ</dt>
+        <dd>@Html.DisplayFor(model => model.CaSi)</dd>
+
+        <dt>Tác giả</dt>
+        <dd>@Html.DisplayFor(model => model.TacGia)</dd>
+
+        <dt>
+            Ngày cập nhật
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayCapNhat)
+        </dd>
+
+        <dt>
+            Hình ảnh bài hát
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.HinhAnhBH)" alt="Ảnh bài hát" style="width:150px; height:150px" />
+        </dd>
+        <dt>
+            Lời bài hát
+        </dt>
+
+        <dd>
+            <p>@Html.TextAreaFor(model => model.LoiBH, new { htmlAttributes = new { @class = "form-control" }, cols = "60", rows = "15" })</p>
+        </dd>
+        <dt>
+            Link bài hát
+        </dt>
+
+        <dd>
+            <p>@Html.DisplayFor(model => model.UrlBH)</p>
+            <audio controls>
+                <source src="horse.ogg" type="audio/ogg">
+                <source src="~/Content/music/@Html.DisplayFor(model => model.UrlBH)" type="audio/mpeg">
+                Trình duyệt của bạn không hỗ trợ các yếu tố âm thanh.
+            </audio>
+
+        </dd>
+
+
+    </dl>
+</div>
+<br />
+<div class="action-links">
+    @Html.ActionLink("✏️ Sửa", "Edit", new { id = Model.Id }, new { @class = "btn-action btn-edit" })
+    @Html.ActionLink("⬅️ Trở lại", "Index", null, new { @class = "btn-action btn-back" })
+</div>
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fb;
+            color: #333;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: #FF5722; /* Màu cam giống thêm bài hát */
+            letter-spacing: 1px;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 8px;
+        }
+
+        .divider {
+            width: 60px; /* Đường kẻ mảnh, ngắn, căn giữa */
+            height: 1px;
+            background-color: #ff5722;
+            margin: 8px auto 25px auto;
+        }
+
+        .details-container {
+            max-width: 750px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 16px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Chữ “Tên bài hát”, “Ca sĩ”... màu đen */
+        .detail-list dt {
+            font-weight: 600;
+            color: #000;
+            margin-top: 16px;
+        }
+
+        /* Phần nội dung bài hát */
+        .detail-list dd {
+            margin-left: 0;
+            margin-bottom: 12px;
+            padding: 8px 10px;
+            background-color: #f3f6fa;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            color: #333;
+        }
+
+        .song-image {
+            width: 160px;
+            height: 160px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            margin-top: 6px;
+        }
+
+        .lyrics-box {
+            margin-top: 10px;
+        }
+
+        .lyrics-text {
+            width: 100%;
+            resize: none;
+            background-color: #fafafa;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            color: #333;
+            cursor: default;
+        }
+
+            .lyrics-text:focus {
+                outline: none;
+                border-color: #1E88E5;
+                box-shadow: 0 0 5px rgba(30, 136, 229, 0.3);
+            }
+
+        .audio-player {
+            margin-top: 10px;
+            width: 100%;
+            border-radius: 6px;
+            background: #f1f1f1;
+        }
+
+        .action-links {
+            text-align: center;
+            margin: 20px 0 40px;
+        }
+
+        .btn-action {
+            background-color: #FF5722;
+            color: white;
+            border: none;
+            padding: 12px 26px;
+            font-size: 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-edit {
+            background-color: #e64a19;
+            transform: translateY(-2px);
+        }
+
+            .btn-edit:hover {
+                background-color: #1565C0;
+                transform: scale(1.05);
+            }
+
+        .btn-back {
+            text-decoration: none;
+            background-color: #607D8B;
+            color: white;
+            padding: 12px 26px;
+            font-size: 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+            .btn-back:hover {
+                background-color: #455A64;
+                transform: translateY(-2px);
+            }
+
+        .text-danger {
+            color: #d32f2f;
+        }
+    </style>

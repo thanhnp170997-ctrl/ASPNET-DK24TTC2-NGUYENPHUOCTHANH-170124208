@@ -1,0 +1,129 @@
+﻿@model WebsiteNhacOnl.Models.PhanHoiND
+
+@{
+    ViewBag.Title = "Chi Tiết Phản Hồi";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="~/Areas/Admin/ContentAd/css/adbaihatstyle.css" rel="stylesheet" />
+
+<div class="details-container">
+    <div class="details-card">
+        <h2>CHI TIẾT PHẢN HỒI</h2>
+        <hr />
+
+        <dl class="detail-list">
+            <dt>Họ tên</dt>
+            <dd>@Html.DisplayFor(model => model.HoTen)</dd>
+
+            <dt>Năm sinh</dt>
+            <dd>@Html.DisplayFor(model => model.NamSinh)</dd>
+
+            <dt>SĐT</dt>
+            <dd>@Html.DisplayFor(model => model.Sdt)</dd>
+
+            <dt>Mail</dt>
+            <dd>@Html.DisplayFor(model => model.Mail)</dd>
+
+            <dt>Địa chỉ</dt>
+            <dd>@Html.DisplayFor(model => model.DiaChi)</dd>
+
+            <dt>Nội dung</dt>
+            <dd class="content-box">@Html.DisplayFor(model => model.NdPhanHoi)</dd>
+        </dl>
+
+        <div class="form-actions">
+            @Html.ActionLink("← Trở Lại", "Index", null, new { @class = "btn-back" })
+        </div>
+    </div>
+</div>
+
+@*<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f3f4f6, #e0e0e0);
+            color: #000;
+        }
+
+        .details-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 40px;
+        }
+
+        .details-card {
+            background: #fff;
+            padding: 40px 50px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            max-width: 700px;
+            transition: all 0.3s ease;
+        }
+
+            .details-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            }
+
+            .details-card h2 {
+                font-size: 28px;
+                text-align: center;
+                color: #FF5722;
+                font-weight: 700;
+                margin-bottom: 20px;
+                letter-spacing: 1px;
+            }
+
+            .details-card hr {
+                border: none;
+                height: 2px;
+                background-color: #FF5722;
+                width: 80px;
+                margin: 10px auto 30px;
+            }
+
+        .detail-list dt {
+            font-weight: 600;
+            color: #000;
+            margin-top: 15px;
+        }
+
+        .detail-list dd {
+            margin-left: 10px;
+            margin-bottom: 12px;
+            padding: 8px 12px;
+            background-color: #f3f6fa;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            color: #333;
+        }
+
+        .content-box {
+            white-space: pre-wrap; /* giữ xuống dòng */
+        }
+
+        .form-actions {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .btn-back {
+            text-decoration: none;
+            background-color: #607D8B;
+            color: white;
+            padding: 12px 26px;
+            font-size: 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+            .btn-back:hover {
+                background-color: #455A64;
+                transform: translateY(-2px);
+            }
+    </style>*@

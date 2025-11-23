@@ -1,0 +1,88 @@
+﻿@model IEnumerable<WebsiteNhacOnl.Models.PhanHoiND>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Link Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="~/Areas/Admin/ContentAd/css/admin-style.css" rel="stylesheet" />
+
+@*<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            color: #333;
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #A9A9A9;
+        }
+
+        th {
+            background-color: #f3f3f3;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+
+
+        #action a img {
+            transition: transform 0.2s;
+        }
+
+            #action a img:hover {
+                transform: scale(1.1);
+            }
+    </style>*@
+
+<br />
+<h2 style="text-align:center;font-size:32px;color:blue">PHẢN HỒI</h2>
+<br />
+<table class="table">
+    <tr>
+        <th>Họ tên</th>
+        <th>Năm sinh</th>
+        <th>SĐT</th>
+        <th>Mail</th>
+        <th>Thao tác</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.HoTen)</td>
+            <td>@Html.DisplayFor(modelItem => item.NamSinh)</td>
+            <td>@Html.DisplayFor(modelItem => item.Sdt)</td>
+            <td>@Html.DisplayFor(modelItem => item.Mail)</td>
+            <td id="action">
+                @Html.Raw(@Html.ActionLink("[replacetext]", "Details", new { id = item.Id })
+                    .ToHtmlString().Replace("[replacetext]", " <img src=\"/Content/images/imgweb/DETAILS1.png\" height=\"25\">"))
+                @Html.Raw(@Html.ActionLink("[replacetext]", "Delete", new { id = item.Id })
+                    .ToHtmlString().Replace("[replacetext]", " <img src=\"/Content/images/imgweb/tay.png\" height=\"25\">"))
+            </td>
+        </tr>
+    }
+</table>

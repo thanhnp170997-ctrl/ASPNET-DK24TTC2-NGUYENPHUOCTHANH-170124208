@@ -1,0 +1,87 @@
+﻿@model IEnumerable<WebsiteNhacOnl.Models.TheLoai>
+
+@{
+    ViewBag.Title = "Thể loại";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="~/Content/CSS/nct-style.css" />
+
+
+@*<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #1e2a2f 0%, #0b0d0f 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        h2 {
+            color: #fff;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .category-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s, background 0.3s;
+            cursor: pointer;
+        }
+
+            .category-card:hover {
+                transform: translateY(-5px);
+                background: rgba(255,255,255,0.08);
+            }
+
+            .category-card i.fa-music {
+                font-size: 40px;
+                color: #1ed760; /* màu xanh lá kiểu NCT */
+                margin-bottom: 15px;
+            }
+
+            .category-card h4 {
+                margin: 0;
+                font-weight: 500;
+                color: #fff;
+                font-size: 16px;
+            }
+
+        .row-custom {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .category-card a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>*@
+
+<div class="container py-4" style="max-width:1200px; margin:auto;">
+    <h2 class="download-title"> Thể Loại Bài Hát </h2>
+
+
+    <div class="row row-custom">
+        @foreach (var item in Model)
+        {
+            <div class="category-card col-lg-3 col-md-4 col-sm-6">
+                <a href="@Url.Action("NhacTheoTheLoai","BaiHats", new { id = item.Id })">
+                    <i class="fa fa-music"></i>
+                    <h4>@item.TenTL</h4>
+                </a>
+            </div>
+        }
+    </div>
+</div>
